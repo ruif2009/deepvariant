@@ -552,6 +552,8 @@ message DeepVariantDatasetConfig {
   // filled in order to compute how the learning rate decays, and also used
   // in make_training_batches.
   int32 num_examples = 3;
+
+  int32 num_classes = 4;
 }
 
 // Next ID: 3.

@@ -68,7 +68,8 @@ def make_golden_dataset(compressed_inputs=False):
   return data_providers.DeepVariantDataSet(
       name='labeled_golden',
       source=source_path,
-      num_examples=testdata.N_GOLDEN_TRAINING_EXAMPLES)
+      num_examples=testdata.N_GOLDEN_TRAINING_EXAMPLES,
+      num_classes=3)
 
 
 def _test_dataset_config(filename, **kwargs):
@@ -87,7 +88,8 @@ class DataProviderTest(parameterized.TestCase):
         'golden.dataset_config.pbtxt',
         name='some_dataset_name',
         tfrecord_path='/path/to/dataset',
-        num_examples=1000)
+        num_examples=1000, 
+        num_classes=3)
     ds = data_providers.get_dataset(
         dataset_config_pbtext_filename,
         tensor_shape=[3, 4, pileup_image.DEFAULT_NUM_CHANNEL])
@@ -144,7 +146,8 @@ class DataProviderTest(parameterized.TestCase):
         'test_good_dataset.pbtxt',
         name='some_dataset_name',
         tfrecord_path='/path/to/dataset',
-        num_examples=1000)
+        num_examples=1000,
+        num_classes=3)
     ds = data_providers.get_dataset(
         dataset_config_pbtext_filename,
         tensor_shape=[100, 221, pileup_image.DEFAULT_NUM_CHANNEL])
@@ -206,7 +209,8 @@ class DataProviderTest(parameterized.TestCase):
         'test_sharded.pbtxt',
         name='sharded_test',
         tfrecord_path=sharded_path,
-        num_examples=golden_dataset.num_examples)
+        num_examples=golden_dataset.num_examples,
+        num_classes=3)
 
     self.assertDataSetExamplesMatchExpected(
         data_providers.get_dataset(config_file).get_slim_dataset(),
@@ -273,7 +277,8 @@ class DataProviderTest(parameterized.TestCase):
     ds = data_providers.DeepVariantDataSet(
         name='test_shape',
         source=test_utils.test_tmpfile(tfrecord_path_to_match),
-        num_examples=1)
+        num_examples=1,
+        num_classes=3)
     self.assertEqual(valid_shape, ds.tensor_shape)
 
   def test_get_shape_from_examples_path_invalid_path(self):
@@ -281,7 +286,8 @@ class DataProviderTest(parameterized.TestCase):
       data_providers.DeepVariantDataSet(
           name='test_invalid_path',
           source='/this/path/does/not/exist',
-          num_examples=1)
+          num_examples=1,
+          num_classes=3)
 
 
 if __name__ == '__main__':

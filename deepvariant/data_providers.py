@@ -191,7 +191,7 @@ class DeepVariantDataSet(object):
         items_to_descriptions=None)
 
 
-def _get_dataset(name, path, num_examples, tensor_shape=None):
+def _get_dataset(name, path, num_examples, num_classes, tensor_shape=None):
   """Creates a dataset with a specified name a path to the source file.
 
   Args:
@@ -216,6 +216,7 @@ def _get_dataset(name, path, num_examples, tensor_shape=None):
       name=name,
       source=path,
       num_examples=num_examples,
+      num_classes=num_classes,
       tensor_shape=tensor_shape)
 
 
@@ -269,6 +270,7 @@ def get_dataset(dataset_config_filename, tensor_shape=None):
       dataset_config.name,
       dataset_config.tfrecord_path,
       dataset_config.num_examples,
+      dataset_config.num_classes,
       tensor_shape=tensor_shape)
 
 
