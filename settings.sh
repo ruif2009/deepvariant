@@ -62,7 +62,7 @@ export DV_PACKAGE_CURL_PATH="https://storage.googleapis.com/deepvariant/packages
 # Set this to 1 to use DeepVariant with GPUs. Set it to an already existing
 # value in the environment (allowing command line control of the build),
 # defaulting to 0 (CPU only build).
-export DV_GPU_BUILD="${DV_GPU_BUILD:-0}"
+export DV_GPU_BUILD="${DV_GPU_BUILD:-1}"
 
 # If this variable is set to 1, DeepVariant will use a TensorFlow wheel file
 # compiled to use AVX and SSE instructions. This instructions require Sandy
@@ -85,7 +85,7 @@ export DV_TF_NIGHTLY_BUILD="${DV_TF_NIGHTLY_BUILD:-0}"
 # Set this to 1 to make our prereq scripts install the CUDA libraries.
 # If you already have CUDA installed, such as on a properly provisioned
 # Docker image, it shouldn't be necessary.
-export DV_INSTALL_GPU_DRIVERS="${DV_INSTALL_GPU_DRIVERS:-0}"
+export DV_INSTALL_GPU_DRIVERS="${DV_INSTALL_GPU_DRIVERS:-1}"
 
 export PYTHON_BIN_PATH=$(which python)
 export USE_DEFAULT_PYTHON_LIB_PATH=1
