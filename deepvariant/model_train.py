@@ -244,10 +244,17 @@ def run(target, is_chief, device_fn):
                                       FLAGS.rmsprop_epsilon)
 
       # Create training op
-      variables_to_train = set()
-      for scope in ['InceptionV3/Logits', 'InceptionV3/Mixed_7c', 'InceptionV3/Mixed_7b']:
-          variables_to_train |= set(slim.get_variables(scope))
-      variables_to_train = list(variables_to_train)
+      if model.name == 'inception_v3':
+          variables_to_train = set()
+          for scope in ['InceptionV3/Logits', 'InceptionV3/Mixed_7c', 'InceptionV3/Mixed_7b']:
+              variables_to_train |= set(slim.get_variables(scope))
+          #print('# of variables we wish to train: {}\n'.format(len(variables_to_train)))
+          #print(*list(variables_to_train), sep = "\n")
+          variables_to_train = [v for v in variables_to_train if v in tf.trainable_variables()]
+          #print('# of trainable variables: {}\n'.format(len(variables_to_train)))
+          #print(*variables_to_train, sep = "\n")
+      else:
+          variables_to_train = tf.trainable_variables()
 
       train_tensor = slim.learning.create_train_op(
           total_loss,
