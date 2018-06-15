@@ -326,7 +326,7 @@ class DeepVariantInceptionV3(DeepVariantSlimModel):
     super(DeepVariantInceptionV3, self).__init__(
         name='inception_v3',
         n_classes_model_variable='InceptionV3/Logits/Conv2d_1c_1x1/weights',
-        excluded_scopes=['InceptionV3/Logits', 'InceptionV3/Conv2d_1a_3x3'],
+        excluded_scopes=['InceptionV3/Logits'],
         pretrained_model_path=('/namespace/vale-project/models/classification/'
                                'imagenet/inception_v3/model.ckpt-9591376'))
 
