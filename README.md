@@ -45,6 +45,14 @@ Cloud Platform.
 *   [Getting Started with GCP](deepvariant-gcp-info.md) (It is not required to
     run DeepVariant on GCP.)
 
+## Other resources
+
+*   [Google Developer Codelab: Variant Calling on a Rice genome with
+    DeepVariant](https://codelabs.developers.google.com/codelabs/genomics-deepvariant)
+*   [Improve DeepVariant for BGISEQ germline variant
+    calling](http://bit.ly/train-deepvariant) |
+    [slides](https://github.com/SVAI/RecausalNucleotideNetworks/blob/master/ReCausalNucleotideNetwork.pdf)
+
 <!-- mdlint on -->
 
 <a name="about"></a>
@@ -66,6 +74,12 @@ assign genotype likelihoods from the experimental data produced by the
 instrument. Read additional information on the [Google Research
 blog](https://research.googleblog.com/2017/12/deepvariant-highly-accurate-genomes.html).
 
+Under the hood, DeepVariant relies on
+[Nucleus](https://github.com/google/nucleus), a library of Python and C++ code
+for reading and writing data in common genomics file formats (like SAM and VCF)
+designed for painless integration with the
+[TensorFlow](https://www.tensorflow.org/) machine learning framework.
+
 ## Evaluating DeepVariant
 
 We are delighted to see several external evaluations of the DeepVariant method.
@@ -82,6 +96,12 @@ of several variant calling methods, including DeepVariant, using a variety of
 read sets from HG001, HG002, and HG005. They have also evaluated DeepVariant
 under a variety of [noisy sequencing
 conditions](https://blog.dnanexus.com/2018-01-16-evaluating-the-performance-of-ngs-pipelines-on-noisy-wgs-data/).
+
+Independent evaluations of DeepVariant v0.6 from both
+[DNAnexus](https://blog.dnanexus.com/2018-04-18-deepvariant-amplified/) and
+[bcbio](https://github.com/bcbio/bcbio_validations/tree/master/deepvariant#deepvariant-v06-release-strelka2-stratification-and-initial-gatk-cnn)
+are also available. Their analyses support our findings of improved indel
+accuracy, and also include comparisons to other variant calling tools.
 
 ## Support
 
@@ -122,6 +142,8 @@ specifically call out a few key ones:
 *   [GNU Parallel](https://www.gnu.org/software/parallel/)
 
 *   [htslib & samtools](http://www.htslib.org/)
+
+*   [Nucleus](https://github.com/google/nucleus)
 
 *   [numpy](http://www.numpy.org/)
 
