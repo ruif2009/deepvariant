@@ -223,7 +223,7 @@ def run(target, is_chief, device_fn):
       moving_average_variables.append(total_loss)
 
       variable_averages = tf.train.ExponentialMovingAverage(
-          FLAGS.moving_average_decay, slim.get_or_create_global_step())
+          FLAGS.moving_average_decay, tf.train.get_or_create_global_step())
 
       tf.add_to_collection(tf.GraphKeys.UPDATE_OPS,
                            variable_averages.apply(moving_average_variables))
@@ -234,7 +234,7 @@ def run(target, is_chief, device_fn):
 
       learning_rate = tf.train.exponential_decay(
           FLAGS.learning_rate,
-          slim.get_or_create_global_step(),
+          tf.train.get_or_create_global_step(),
           decay_steps,
           FLAGS.learning_rate_decay_factor,
           staircase=True)
