@@ -542,8 +542,10 @@ class LabelerMatch(object):
     with_gts = [copy.deepcopy(v) for v in self.variants]
     for variant, gt in zip(with_gts, self.matched_variant_genotypes):
       if variant.calls:
+        logging.info('if variant.calls: %s', sum(gt))
         variant.calls[0].genotype[:] = gt
       else:
+        logging.info('else: %s', sum(gt))
         variant.calls.add(genotype=gt)
     return with_gts
 

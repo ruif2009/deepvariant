@@ -778,7 +778,7 @@ class RegionProcessor(object):
           for example in self.create_pileup_examples(candidate)
       ]
 
-    logging.info('Found %s candidates in %s [%0.2fs elapsed]', len(examples),
+    logging.info('Identified %s candidates in %s [%0.2fs elapsed]', len(examples),
                  ranges.to_literal(region), region_timer.Stop())
     return candidates, examples, gvcfs
 
@@ -913,6 +913,7 @@ class RegionProcessor(object):
     # Set the label of the example to the # alts given our alt_alleles_indices.
     tf_utils.example_set_label(example,
                                label.label_for_alt_alleles(alt_alleles_indices))
+    logging.info('label is %s', label.label_for_alt_alleles(alt_alleles_indices))
     return example
 
 

@@ -33,7 +33,7 @@ from __future__ import division
 from __future__ import print_function
 
 import abc
-
+from absl import logging
 
 
 from third_party.nucleus.util import variant_utils

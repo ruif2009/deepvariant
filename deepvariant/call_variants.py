@@ -327,7 +327,7 @@ def call_variants(examples_filename,
 
       # Initial the model from the provided checkpoint using our session.
       logging.info('Initializing model from %s', checkpoint_path)
-      model.initialize_from_checkpoint(checkpoint_path, 3, False)(sess)
+      model.initialize_from_checkpoint(checkpoint_path, 2, False)(sess)
 
       if execution_hardware == 'accelerator':
         if not any(dev.device_type != 'CPU' for dev in sess.list_devices()):

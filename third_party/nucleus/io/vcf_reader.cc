@@ -330,10 +330,10 @@ StatusOr<std::shared_ptr<VariantIterable>> VcfReader::Query(
     return tf::errors::NotFound(
         StrCat("Unknown reference_name '", region.reference_name(), "'"));
   }
-  if (region.start() < 0 || region.start() >= region.end())
+  if (region.start() < 0 || region.start() >= region.end()) {
     return tf::errors::InvalidArgument(
         StrCat("Malformed region '", region.ShortDebugString(), "'"));
-
+  }
   // Get the tid (index of reference_name in our tabix index),
   const int tid = tbx_name2id(idx_, reference_name);
   hts_itr_t* iter = nullptr;
