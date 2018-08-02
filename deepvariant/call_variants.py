@@ -314,7 +314,7 @@ def call_variants(examples_filename,
         examples_filename, model, batch_size, FLAGS.num_readers)
 
     # Create our model and extract the predictions from the model endpoints.
-    predictions = model.create(images, 3, is_training=False)['Predictions']
+    predictions = model.create(images, 2, is_training=False)['Predictions']
 
     # The op for initializing the variables.
     init_op = tf.group(tf.global_variables_initializer(),
