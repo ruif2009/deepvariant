@@ -566,14 +566,24 @@ def merge_predictions(call_variants_outputs, qual_filter=None):
 
   alt_alleles_to_remove = get_alt_alleles_to_remove(call_variants_outputs,
                                                     qual_filter)
-  flattened_probs_dict = convert_call_variants_outputs_to_probs_dict(
-      canonical_variant, call_variants_outputs, alt_alleles_to_remove)
-
+  #flattened_probs_dict = convert_call_variants_outputs_to_probs_dict(
+  #    canonical_variant, call_variants_outputs, alt_alleles_to_remove)
+  predictions = [1]
+  for call_variants_output in call_variants_outputs:
+    allele_set2 = frozenset(
+        canonical_variant.alternate_bases[index]
+        for index in call_variants_output.alt_allele_indices.indices)
+    if alt_alleles_to_remove.intersection(allele_set2):
+      continue
+    p0, p1 = call_variants_output.genotype_probabilities
+    if p0 < 0.00001:
+      predictions.append(p1/0.00001)
+  
   canonical_variant = prune_alleles(canonical_variant, alt_alleles_to_remove)
-  predictions = [
-      min(flattened_probs_dict[(m, n)]) for _, _, m, n in
-      variant_utils.genotype_ordering_in_likelihoods(canonical_variant)
-  ]
+  #predictions = [
+  #    min(flattened_probs_dict[(m, n)]) for _, _, m, n in
+  #    variant_utils.genotype_ordering_in_likelihoods(canonical_variant)
+  #]
   denominator = sum(predictions)
   # Note the simplify_alleles call *must* happen after the predictions
   # calculation above. flattened_probs_dict is indexed by alt allele, and
