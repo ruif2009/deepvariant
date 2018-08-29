@@ -151,10 +151,10 @@ def loss(logits, one_hot_labels, label_smoothing):
   Returns:
     A `Tensor` whose value represents the total loss.
   """
-  scale = tf.constant([[95.5], [1.0]])
-  weights = tf.squeeze(tf.matmul(one_hot_labels, scale))
+  #scale = tf.constant([[95.5], [1.0]])
+  #weights = tf.squeeze(tf.matmul(one_hot_labels, scale))
   slim.losses.softmax_cross_entropy(
-      logits, one_hot_labels, label_smoothing=label_smoothing, weights=weights)#1.0)
+      logits, one_hot_labels, label_smoothing=label_smoothing, weights=1.0)
   return slim.losses.get_total_loss()
 
 
@@ -248,7 +248,7 @@ def run(target, is_chief, device_fn):
       # Create training op
       if model.name == 'inception_v3':
           variables_to_train = set()
-          for scope in ['InceptionV3/Logits', 'InceptionV3/Mixed_7c', 'InceptionV3/Mixed_7b']:
+          for scope in ['InceptionV3/Logits', 'InceptionV3/Mixed_7c']:
               variables_to_train |= set(slim.get_variables(scope))
           #print('# of variables we wish to train: {}\n'.format(len(variables_to_train)))
           #print(*list(variables_to_train), sep = "\n")
